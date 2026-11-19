@@ -3,6 +3,8 @@ import 'package:cartaovt_app/models/cartao_model.dart';
 import 'package:flutter/material.dart';
 
 class LoginController extends ChangeNotifier {
+  static final senha = RegExp(r'^\d{4}');
+  
   final CartaoModel _cartao = CartaoModel(
     numeroCartao: '4821',
     senha: '123', 
