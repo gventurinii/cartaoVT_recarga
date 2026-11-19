@@ -6,7 +6,7 @@ class CartaoModel {
   String ultimaRecarga;
 
 
-  CartaoModel({
+  CartaoModel( {
     required this.numeroCartao,
     required this.senha,
     required this.nomePassageiro,

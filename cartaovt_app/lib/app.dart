@@ -10,7 +10,6 @@ class CartaoVt extends StatefulWidget {
 class _CartaoVtState extends State<CartaoVt> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     throw UnimplementedError();
   }
 }
