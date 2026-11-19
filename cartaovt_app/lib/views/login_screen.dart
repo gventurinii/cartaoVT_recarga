@@ -88,8 +88,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     _cartaoController.text,
                     _senhaController.text,
                   );
-
-                
+                  
+                  if (autorizado) {
+                    Navigator.pushReplacement(
+                      context, 
+                      MaterialPageRoute(builder: (context) => InicioScreen()),
+                    );
+                  }
                 },
                 child: Text('Entrar', style: TextStyle(color: Colors.white, fontSize: 16)),
               ),
