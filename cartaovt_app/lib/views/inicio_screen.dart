@@ -136,8 +136,8 @@ class EscolherValoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Recarregar saldo')),
-      body: const Center(child: Text('Escolha o valor da recarga')),
+      appBar: AppBar(title: const Text('Recarregar')),
+      body: const Center(child: Text('Escolha um valor')),
     );
   }
 }
