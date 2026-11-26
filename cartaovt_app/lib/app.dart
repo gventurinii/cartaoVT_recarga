@@ -1,15 +1,21 @@
+import 'package:cartaovt_app/theme/tema.dart';
 import 'package:flutter/material.dart';
 
-class CartaoVt extends StatefulWidget {
-  const CartaoVt ({super.key});
+class CartaoVt_app extends StatefulWidget {
+  const CartaoVt_app ({super.key});
 
   @override
-  State<CartaoVt> createState() => _CartaoVtState();
+  State<CartaoVt_app> createState() => _CartaoVtState();
 }
 
-class _CartaoVtState extends State<CartaoVt> {
+class _CartaoVtState extends State<CartaoVt_app> {
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      darkTheme: TemaCartaoVT.escuro(),
+      home: const Scaffold(),
+    );
   }
+  
 }
