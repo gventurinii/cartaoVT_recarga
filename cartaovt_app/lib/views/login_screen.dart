@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
     final LoginController _controller = LoginController();
+  bool _senhaEscondida = true;
 
     final TextEditingController _cartaoController = TextEditingController();
     final TextEditingController _senhaController = TextEditingController();
@@ -36,15 +37,29 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Icon(Icons.directions_bus, size: 64, color: Colors.green),
+                Icon(Icons.directions_bus, size: 72, color: Colors.green),
                 SizedBox(height: 16),
                 Text(
                   'CartãoVT Recarga',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 32),
+                SizedBox(height: 20),
 
+                Text(
+                  'Consulte o saldo e recarregue seu cartão de vale-transporte.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                SizedBox(height: 16),
+                
                 // Campo do cartão: aceita somente números (RN01)
                 TextField(
                   controller: _cartaoController,
@@ -59,11 +74,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Campo da senha: formato oculto obscureText: true (RN02)
                 TextField(
                   controller: _senhaController,
-                  obscureText: true,
+                  obscureText: _senhaEscondida,
                   decoration: InputDecoration(
                     labelText: 'Senha',
-                    prefixIcon: Icon(Icons.visibility_off),
+                    prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      tooltip: _senhaEscondida ? 'Mostrar senha' : 'Ocultar senha',
+                      icon: Icon(
+                        _senhaEscondida ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _senhaEscondida = !_senhaEscondida;
+                        });
+                      },
+                    ),
                   ),
                 ),
           

@@ -28,6 +28,7 @@ class _InicioScreenState extends State<InicioScreen> {
             title: Text('Olá, ${_controller.cartao.nomePassageiro}'),
             automaticallyImplyLeading: false,
           ),
+
           body: Padding(
             padding: EdgeInsets.all(16.0),
              child: Column(
@@ -39,11 +40,12 @@ class _InicioScreenState extends State<InicioScreen> {
                   child: Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('Saldo disponível',
-                          style: TextStyle(color: Colors.grey, fontSize: 14),
-                        ),
+                          Text('Saldo disponível',
+                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                          ),
+
                         SizedBox(height: 8),
                         Text(
                           _controller.saldoFormatado,
@@ -53,21 +55,31 @@ class _InicioScreenState extends State<InicioScreen> {
                             color: Colors.green,
                           ),
                         ),
+
                         SizedBox(height: 16),
-                        Text(
-                          _controller.ultimoDigitosCartao,
-                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              _controller.ultimoDigitosCartao,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
+
                 SizedBox(height: 20),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     padding: EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                   ),
                   onPressed: (){
                     Navigator.push(
@@ -75,9 +87,10 @@ class _InicioScreenState extends State<InicioScreen> {
                       MaterialPageRoute(builder: (context) => EscolherValoresScreen()),
                     );
                   }, 
+
                   icon: Icon(Icons.add, color: Colors.white),
                   label: Text(
-                    '+ Recarregar saldo',
+                    'Recarregar saldo',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
@@ -86,8 +99,11 @@ class _InicioScreenState extends State<InicioScreen> {
 
                 Text(
                   _controller.textoUltimaRecarga,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500
+                  ),
                 ),
               ],
             ),
@@ -107,6 +123,7 @@ class _InicioScreenState extends State<InicioScreen> {
                 );
               }
             },
+            
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
@@ -136,8 +153,8 @@ class EscolherValoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Recarregar saldo')),
-      body: const Center(child: Text('Escolha o valor da recarga')),
+      appBar: AppBar(title: const Text('Recarregar')),
+      body: const Center(child: Text('Escolha um valor')),
     );
   }
 }
