@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../controllers/inicio_controller.dart';
-import 'recarga_valor_screen.dart';
+import '../views/recarga_valor_screen.dart';
 import 'historico_screen.dart';
 
 class InicioScreen extends StatefulWidget {
-  const InicioScreen({super.key});
+  final double? saldoAtualizado;
+
+  const InicioScreen({super.key, this.saldoAtualizado});
 
   @override
   State<InicioScreen> createState() => _InicioScreenState();
@@ -13,6 +15,14 @@ class InicioScreen extends StatefulWidget {
 class _InicioScreenState extends State<InicioScreen> {
   final InicioController _controller = InicioController();
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.saldoAtualizado != null) {
+      _controller.atualizarSaldo(widget.saldoAtualizado!);
+    }
+  }
 
   @override
   void dispose() {

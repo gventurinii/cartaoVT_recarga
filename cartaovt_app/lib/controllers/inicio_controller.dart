@@ -21,4 +21,9 @@ class InicioController extends ChangeNotifier {
   String get textoUltimaRecarga {
     return 'Última recarga: ${cartao.ultimaRecarga}';
   }
+
+  void atualizarSaldo(double novoSaldo) {
+  cartao.saldo = novoSaldo;
+  notifyListeners();
+}
 }
