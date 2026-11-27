@@ -1,5 +1,7 @@
-import 'package:cartaovt_app/controllers/inicio_controller.dart';
 import 'package:flutter/material.dart';
+import '../controllers/inicio_controller.dart';
+import 'recarga_valor_screen.dart';
+import 'historico_screen.dart';
 
 class InicioScreen extends StatefulWidget {
   const InicioScreen({super.key});
@@ -20,153 +22,164 @@ class _InicioScreenState extends State<InicioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return AnimatedBuilder(
-      animation: _controller, 
+      animation: _controller,
       builder: (context, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Olá, ${_controller.cartao.nomePassageiro}'),
-            automaticallyImplyLeading: false,
-          ),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Olá, ${_controller.cartao.nomePassageiro}',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 18),
 
-          body: Padding(
-            padding: EdgeInsets.all(16.0),
-             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Card(
-                  elevation: 4.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
+                  // Card de saldo disponível
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 22,
+                      horizontal: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? const Color(0xFF1D3526)
+                          : const Color(0xFFE9F4EC),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                          Text('Saldo disponível',
-                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                        Text(
+                          'Saldo disponível',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: isDark
+                                ? Colors.grey.shade300
+                                : const Color(0xFF4A554E),
                           ),
-
-                        SizedBox(height: 8),
+                        ),
+                        const SizedBox(height: 6),
                         Text(
                           _controller.saldoFormatado,
                           style: TextStyle(
                             fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            fontWeight: FontWeight.w800,
+                            color: isDark
+                                ? const Color(0xFF6DD597)
+                                : const Color(0xFF1E7A46),
+                            letterSpacing: -0.5,
                           ),
-                        ),
-
-                        SizedBox(height: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              _controller.ultimoDigitosCartao,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
+                  const SizedBox(height: 16),
 
-                SizedBox(height: 20),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    padding: EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                  Text(
+                    _controller.ultimoDigitosCartao,
+                    style: const TextStyle(fontSize: 15),
                   ),
-                  onPressed: (){
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => EscolherValoresScreen()),
-                    );
-                  }, 
+                  const SizedBox(height: 14),
 
-                  icon: Icon(Icons.add, color: Colors.white),
-                  label: Text(
-                    'Recarregar saldo',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  // Botão "+ Recarregar saldo"
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isDark
+                            ? const Color(0xFF2B8A53)
+                            : const Color(0xFF1E7A46),
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shape: const StadiumBorder(),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RecargaValorScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        '+ Recarregar saldo',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
 
-                Spacer(),
+                  const Spacer(),
 
-                Text(
-                  _controller.textoUltimaRecarga,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(color: Colors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500
+                  Text(
+                    _controller.textoUltimaRecarga,
+                    style: TextStyle(
+                      fontSize: 13.5,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : const Color(0xFF4F5559),
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                ],
+              ),
             ),
           ),
 
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            onTap: (index) {
+          bottomNavigationBar: NavigationBar(
+            height: 72,
+            selectedIndex: _currentIndex,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            onDestinationSelected: (index) {
               setState(() {
                 _currentIndex = index;
               });
 
               if (index == 1) {
                 Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => HistoricoScreen()),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HistoricoScreen(),
+                  ),
                 );
               }
             },
-            
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+            destinations: [
+              NavigationDestination(
+                icon: Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home),
                 label: 'Início',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.receipt_long),
+              NavigationDestination(
+                icon: Icon(Icons.description_outlined),
+                selectedIcon: Icon(Icons.description),
                 label: 'Histórico',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+              NavigationDestination(
+                icon: Icon(Icons.person_outline),
+                selectedIcon: Icon(Icons.person),
                 label: 'Perfil',
               ),
             ],
           ),
         );
-      }
+      },
     );
   }
 }
 
-
-
-class EscolherValoresScreen extends StatelessWidget {
-  const EscolherValoresScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Recarregar')),
-      body: const Center(child: Text('Escolha um valor')),
-    );
-  }
-}
-
-class HistoricoScreen extends StatelessWidget {
-  const HistoricoScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Histórico')),
-      body: const Center(child: Text('Nenhum histórico disponível')),
-    );
-  }
+class HistoricoScreen {
+  const HistoricoScreen();
 }
