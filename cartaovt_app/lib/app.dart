@@ -1,6 +1,7 @@
 import 'package:cartaovt_app/theme/tema.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class CartaoVt_app extends StatefulWidget {
   const CartaoVt_app ({super.key});
 
@@ -16,6 +17,5 @@ class _CartaoVtState extends State<CartaoVt_app> {
       darkTheme: TemaCartaoVT.escuro(),
       home: const Scaffold(),
     );
-  }
-  
+  } 
 }

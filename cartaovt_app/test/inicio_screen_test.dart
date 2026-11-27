@@ -1,5 +1,6 @@
 import 'package:cartaovt_app/controllers/inicio_controller.dart';
 import 'package:cartaovt_app/views/inicio_screen.dart';
+import 'package:cartaovt_app/views/recarga_valor_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -28,7 +29,7 @@ void main() {
       await tester.tap(botaoRecarregar);
       await tester.pumpAndSettle();
       
-      expect(find.byType(EscolherValoresScreen), findsOneWidget);
+      expect(find.byType(RecargaValorScreen), findsOneWidget);
     });
 
     testWidgets('Teste para o critério A barra de navegação inferior exibe as opções Início, Histórico e Perfil', (WidgetTester tester) async {
@@ -44,4 +45,7 @@ void main() {
       expect(find.byType(HistoricoScreen), findsOneWidget);
     });
   });
+}
+
+class HistoricoScreen {
 }
