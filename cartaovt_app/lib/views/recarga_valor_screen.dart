@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../controllers/botao_controller.dart';
-import 'pagamento_screen.dart';
+import '../views/forma_pagamento_screen.dart';
 
 class RecargaValorScreen extends StatefulWidget {
   const RecargaValorScreen({super.key});
@@ -205,7 +205,7 @@ class _RecargaValorScreenState extends State<RecargaValorScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PagamentoScreen(
+                                  builder: (context) => FormaPagamentoScreen(
                                     valorRecarga: model.valorSelecionado!,
                                   ),
                                 ),
