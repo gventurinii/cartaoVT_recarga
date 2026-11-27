@@ -1,7 +1,6 @@
 import 'package:cartaovt_app/views/recarga_valor_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cartaovt_app/views/recarga_valor_screen.dart';
 
 void main() {
   group('Testes da Tela 3 - RecargaValorScreen', () {
