@@ -40,6 +40,7 @@ class _FormaPagamentoScreenState extends State<FormaPagamentoScreen> {
     required String subtitulo,
     required Widget iconeEsquerdo,
   }) {
+    // ignore: unused_local_variable
     final selecionado = _controller.isSelecionado(titulo);
 
     return InkWell(

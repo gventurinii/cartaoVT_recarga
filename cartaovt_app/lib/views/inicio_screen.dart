@@ -189,7 +189,3 @@ class _InicioScreenState extends State<InicioScreen> {
     );
   }
 }
-
-class HistoricoScreen {
-  const HistoricoScreen();
-}

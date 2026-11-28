@@ -1,13 +1,22 @@
-class MovimentacaoModel {
-  final String tipo;
-  final String descricao;
-  final String dataHora;
-  final double valor;
+enum TipoMovimentacao {
+  credito,
+  debito,
+}
 
-  MovimentacaoModel ({
-    required this.tipo,
+class MovimentacaoModel {
+  final String id;
+  final String descricao;
+  final double valor;
+  final DateTime dataHora;
+  final TipoMovimentacao tipo;
+
+  const MovimentacaoModel({
+    required this.id,
     required this.descricao,
-    required this.dataHora,
     required this.valor,
+    required this.dataHora,
+    required this.tipo,
   });
+
+  bool get isCredito => tipo == TipoMovimentacao.credito;
 }
